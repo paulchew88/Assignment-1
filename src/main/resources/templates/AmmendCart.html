@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragments/common :: myheader"></div>
+</head>
+<body>
+
+
+	<main role="main" class="container">
+		<nav th:replace="fragments/common :: mynavbar"></nav>
+		
+		<div th:if="${not #lists.isEmpty(session.shoppingCart)}">
+			<h4>
+				Total: £<span th:text="${session.shoppingCart.total}"></span>
+			</h4>
+
+			<table class="table table-striped">
+
+				<tr>
+
+					<th>name</th>
+					<th>price</th>
+				
+					
+				</tr>
+
+
+				<tr th:each="item : ${cart}">
+
+					<td th:text="${item.name}"></td>
+					<td>£<span th:text="${item.price}"></span></td>
+					
+					
+				</tr>
+
+			</table>
+	
+		</div>
+		<div th:if="${#lists.isEmpty(session.shoppingCart)}">
+			<P>Shopping cart is empty</P>
+		</div>
+
+	</main>
+
+
+</body>
+</html>

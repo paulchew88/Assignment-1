@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+
+<head>
+<div th:replace="fragments/common :: myheader"></div>
+</head>
+<body>
+
+
+	<main role="main" class="container">
+		<nav th:replace="fragments/common :: mynavbar"></nav>
+
+
+		<h1 align="Left">New Customer</h1>
+		<div class="alert alert-danger" th:if="${error != null}"
+			th:text="${error}"></div>
+
+		<form "form-group" th:action="@{/register}" th:object="${customer}" method="post"
+			align="left">
+			<div>
+				<p>
+					<label for="email" class="col-sm-2 col-form-label">Email:</label><input type="text" th:field="*{email}"
+						id="email" placeholder="email"> <span
+						th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+					
+				</p>
+
+				<p>
+					<label for="password" class="col-sm-2 col-form-label">Password:</label> <input type="password" th:field="*{password}" id="password"
+						placeholder="password"> <span
+						th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+				</p>
+				<label for="billingAddress.houseNumber" class="col-sm-2 col-form-label">HouseNumber/Name:</label> <input type="text"
+					th:field="*{billingAddress.houseNumber}"
+					id="billingAddress.postCode" placeholder="House Number"> <span
+					th:if="${#fields.hasErrors('billingAddress.houseNumber')}"
+					th:errors="*{billingAddress.houseNumber}"></span>
+				</p>
+				<p>
+					<label for="billingAddress.streetName" class="col-sm-2 col-form-label">Street:</label> <input type="text"
+						th:field="*{billingAddress.streetName}"
+						id="billingAddress.streetName" placeholder="Street Name">
+					<span th:if="${#fields.hasErrors('billingAddress.streetName')}"
+						th:errors="*{billingAddress.streetName}"></span> 
+				</p>
+				<label for="billingAddress.town" class="col-sm-2 col-form-label">Town:</label> <input type="text"
+					th:field="*{billingAddress.town}" id="billingAddress.town"
+					placeholder="Town"> <span
+					th:if="${#fields.hasErrors('billingAddress.town')}"
+					th:errors="*{billingAddress.town}"></span> 
+				</p>
+				</p>
+				<label for="billingAddress.city" class="col-sm-2 col-form-label">City:</label> <input type="text"
+					th:field="*{billingAddress.city}" id="billingAddress.city"
+					placeholder="city"> <span
+					th:if="${#fields.hasErrors('billingAddress.city')}"
+					th:errors="*{billingAddress.city}"></span>
+				</p>
+				<p>
+					<label for="billingAddress.postCode" class="col-sm-2 col-form-label">PostCode:</label> <input type="text"
+						th:field="*{billingAddress.postCode}" id="billingAddress.postCode"
+						placeholder="PostCode"> <span
+						th:if="${#fields.hasErrors('billingAddress.postCode')}"
+						th:errors="*{billingAddress.postCode}"></span>
+				</p>
+
+
+				<p>
+					<label for="phoneNumber" class="col-sm-2 col-form-label">PhoneNumber: </label> <input type="text"
+						th:field="*{phoneNumber}" id="phoneNumber"
+						placeholder="Phone Number"> <span
+						th:if="${#fields.hasErrors('phoneNumber')}"
+						th:errors="*{phoneNumber}"></span>
+				</p>
+
+
+
+				<div sec:authorize="hasRole('ROLE_ADMIN')">
+					<p>
+
+						<label for="roles" class="col-sm-2 col-form-label">Role</label> <input type="text" th:field="*{roles}"
+							id="roles" placeholder="roles"> 
+					</p>
+				</div>
+				<div sec:authorize="isAnonymous()">
+					<p>
+						<input type="hidden" th:field="*{roles}" id="roles"
+							placeholder="roles"> </label>
+					</p>
+				</div>
+
+				<p>
+					<input type="hidden" th:value="none" th:field="*{permissions}"
+						id="id" placeholder="permissions">
+
+				</p>
+
+				<p>
+					<button type="submit" class="btn btn-primary">Submit</button>
+					<button type="reset" class="btn btn-secondary">reset</button>
+				</p>
+				<label for="active"></label> <input type="hidden"
+					th:field="*{active}" id="active" placeholder="active">
+
+			</div>
+		</form>
+	</main>
+
+
+</body>
+</html>

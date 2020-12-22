@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragments/common :: myheader"></div>
+</head>
+<body>
+
+
+	<main role="main" class="container">
+		<nav th:replace="fragments/common :: mynavbar"></nav>
+
+
+
+
+		<main role="main" class="container">
+			<h1 align="left">Customers</h1>
+
+			<div class="alert alert-danger" th:if="${error != null}"
+				th:text="${error}"></div>
+			<table class="table table-striped">
+				<tr>
+					
+					<th>Email</th>
+					<th>Password</th>
+					<th>Billing Address</th>
+					<th>Phone Number</th>
+					<th>Actions</th>
+					
+				</tr>
+				<tr th:each="customer : ${customer}">
+					
+					<td th:text="${customer.email}"></td>
+					<td th:text="${customer.password}"></td>
+					<td th:text="${customer.billingAddress}"></td>
+					<td th:text="${customer.phoneNumber}"></td>
+			
+					
+				<td><a class="btn btn-primary"  href="#" th:href="@{/edit/customer/} + ${customer.customerId}">Edit</a>
+					<a class="btn btn-danger" href="#" th:href="@{/remove/customer/} + ${customer.customerId}">delete</a>
+					
+
+
+				</tr>
+			</table>
+			
+
+
+
+
+		</main>
+
+
+
+
+
+
+	</main>
+
+
+</body>
+</html>

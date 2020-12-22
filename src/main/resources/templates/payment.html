@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragments/common :: myheader"></div>
+</head>
+<body>
+
+
+	<main role="main" class="container">
+		<nav th:replace="fragments/common :: mynavbar"></nav>
+
+
+
+
+		<main role="main" class="container">
+			<h1 align="left">Payment</h1>
+
+			<form action="/payment"></form>
+
+			<form class="form-group" action="#" th:action="@{/payment/submit}"
+				th:object="${payment}" method="post" align="left">
+				<div>
+					
+						<p>
+				<div class="input-group mb-3">
+					<label for="amount" class="col-sm-2 col-form-label">Total Cost:</label>
+					<div class="input-group-prepend">
+						<span class="input-group-text">£</span>
+					</div>
+
+					<input type="text" th:field="*{amount}" id="amount"
+						placeholder="Total Price" disabled> <span
+						th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}" ></span>
+				</div>
+				</p>
+					
+					<p>
+						<label for="cardDetails.cardNumber"
+							class="col-sm-2 col-form-label">CardNumber:</label><input
+							type="text" th:field="*{cardDetails.cardNumber}"
+							id="cardDetails.cardNumber" placeholder="16 Digit Card Number" th:minlength="16" th:maxlength="16">
+					</p>
+					<p>
+						<label for="cardDetails.expirationMonth"
+							class="col-sm-2 col-form-label">Expiry Month ("MM"):</label><input
+							type="text" th:field="*{cardDetails.expirationMonth}"
+							id="cardDetails.expirationMonth"
+							placeholder="MM" th:minlength="2" th:maxlength="2">
+
+						<label for="cardDetails.expirationYear">Expiry Year
+							("YY"):</label><input type="text"
+							th:field="*{cardDetails.expirationMonth}"
+							id="cardDetails.expirationYear"
+							placeholder="YY" th:minlength="2" th:maxlength="2">
+					</p>
+
+
+
+					<p>
+						<label for="cardDetails.ccv" class="col-sm-2 col-form-label">CCV:</label><input
+							type="text" th:field="*{cardDetails.ccv}" id="cardDetails.ccv"
+							placeholder="Last 3 Digits on back" th:maxlength="3">
+
+					</p>
+
+					<p>
+						<label for="cardDetails.nameOnCard"
+							class="col-sm-2 col-form-label">Name as it appears on
+							card:</label><input type="text" th:field="*{cardDetails.nameOnCard}"
+							id="cardDetails.nameOnCard" placeholder="Name on Card">
+
+					</p>
+
+					<p>
+						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="reset" class="btn btn-secondary">reset</button>
+					</p>
+				</div>
+			</form>
+
+
+
+		</main>
+
+
+
+
+
+
+	</main>
+
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+body {
+  padding-top: 4em;
+  color: rgb(0, 0, 0);
+}
+.starter-template {
+  padding: 3.5em;
+  text-align: left;
+}
+
+h1{
+	color:#1616e9;
+}
+
+h2{
+	color:#ff0000;
+}
+.form-container{
+	width: 80%;
+}
+h3{
+	color:rgb(23, 217, 211);
+}
+h4{
+	color:rgb(23, 217, 211);
+}
+.iconify { width: 24px; height: 24px; }

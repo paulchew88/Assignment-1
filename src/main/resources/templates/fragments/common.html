@@ -1,0 +1,133 @@
+<html>
+<body>
+	<div th:fragment="myheader">
+		<html lang="en" xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>1-2-3 Groceries</title>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{/css/main.css}" />
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+	</div>
+</body>
+<body>
+	<div class="container">
+		<div th:fragment="mynavbar">
+			<nav class="navbar navbar-expand-lg navbar-black bg-dark fixed-top">
+				<a class="navbar-brand" href="/">Home</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<ul class="navbar-nav">
+						<li class="nav-item active"><a class="nav-link"
+							href="/list/product">Product <span class="sr-only"></span>
+						</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/list/categories">Categories</a></li>
+						<div sec:authorize="hasRole('ROLE_ADMIN')">
+							<li class="nav-item"><a class="nav-link" href="/customer">Customers</a>
+							</li>
+						</div>
+
+						<div sec:authorize="hasRole('ROLE_ADMIN')">
+
+							<li class="nav-item dropdown"><a
+								class="nav-link dropdown-toggle" href="#"
+								id="navbarDropdownMenuLink" data-toggle="dropdown"
+								aria-haspopup="false" aria-expanded="false"> New </a>
+								<div class="dropdown-menu"
+									aria-labelledby="navbarDropdownMenuLink">
+									<a class="dropdown-item" href="/add/categories">Category</a> <a
+										class="dropdown-item" href="/add/product">Product</a> <a
+										class="dropdown-item" href="/register">Customer</a>
+
+
+								</div></li>
+						</div>
+					</ul>
+
+				</div>
+
+				<div class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+
+				</div>
+
+
+				<div class="form-inline">
+					<a href="/cart" class="nav-link "><span class="iconify"
+						data-icon="oi-cart" data-inline="true"></span> </a>
+
+					<div sec:authorize="isAuthenticated()" class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" data-toggle="dropdown"
+							aria-haspopup="false" aria-expanded="false"
+							sec:authentication="name"></a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item"
+								th:href="@{/edit/customer/} + ${#authentication.getPrincipal().getCustomerId}">Edit
+								Details</a> <a class="dropdown-item"
+								th:href="@{/orders/view/} + ${#authentication.getPrincipal().getCustomerId}">View
+								Orders</a>
+
+
+
+						</div>
+
+
+
+					</div>
+
+					<div sec:authorize="isAnonymous()">
+						<a class="btn btn-outline-info my-2 my-sm-0 " href="/login">Login</a>
+					</div>
+					<div sec:authorize="isAnonymous()">
+						<a class="btn btn-outline-info my-2 my-sm-0 " href="/register">Register</a>
+					</div>
+					<div sec:authorize="isAuthenticated()">
+						<a class="btn btn-outline-danger my-2 my-sm-0 " role="button"
+							href="/logout">Logout</a>
+					</div>
+					<form th:action="@{/search/product/}">
+						<input class="form-control mr-sm-2" placeholder="Search"
+							type="text" name="search" id="search">
+
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					</form>
+				</div>
+			</nav>
+			<p>
+			<div class="alert alert-danger" th:if="${error != null}"
+				th:text="${error}"></div>
+			</p>
+
+
+		</div>
+	</div>
+
+</body>
+
+</html>

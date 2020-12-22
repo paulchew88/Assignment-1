@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragments/common :: myheader"></div>
+</head>
+<body>
+
+
+	<main role="main" class="container">
+		<nav th:replace="fragments/common :: mynavbar"></nav>
+
+
+		<h1 align="left">New Category</h1>
+
+		<form class="form-group" action="#" enctype="multipart/form-data"
+			th:action="@{/new/categories}" th:object="${categories}"
+			method="post" align="left">
+			<div>
+				<p>
+					<label for="name" class="col-sm-2 col-form-label">Name:</label><input
+						type="text" th:field="*{name}" id="name"
+						placeholder="Category Name"> <span
+						th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+				</p>
+				<p>
+					<label for="Description" class="col-sm-2 col-form-label">Description:</label>
+					<textarea rows="3" cols="80" type="text" th:field="*{description}"
+						id="description" placeholder="Category Description">
+						</textarea>
+					<span th:if="${#fields.hasErrors('description')}"
+						th:errors="*{description}"></span>
+				</p>
+				<!-- Do not display this image at the moment
+				<p>
+					<input type="file" name="imageFile" class="form-control-file"><span
+						th:if="${#fields.hasErrors('thumbnail')}" th:errors="*{thumbnail}"></span>
+				</p>
+				-->
+
+				<p></p>
+
+				<p>
+					<button type="submit" class="btn btn-primary">Submit</button>
+					<button type="reset" class="btn btn-secondary">reset</button>
+				</p>
+			</div>
+		</form>
+	</main>
+
+
+</body>
+</html>

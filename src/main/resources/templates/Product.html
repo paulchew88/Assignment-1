@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragments/common :: myheader"></div>
+</head>
+<body>
+
+
+	<main role="main" class="container">
+		<nav th:replace="fragments/common :: mynavbar"></nav>
+
+
+
+
+		<main role="main" class="container">
+			<h1 align="left">Products</h1>
+
+
+		</main>
+		<form th:action="@{/cart/add}">
+			<table class="table table-striped">
+
+				<tr>
+					<th>id</th>
+					<td><input type="hidden" th:value="${product.productId}"
+						name="id" /><span th:text="${product.productId}"></span></td>
+				</tr>
+				<tr>
+					<th>name</th>
+					<td th:text="${product.name}"></td>
+				</tr>
+				<tr>
+					<th>sku</th>
+					<td th:text="${product.sku}"></td>
+				</tr>
+				<tr>
+					<th>price</th>
+					<td>£<span th:text="${product.price}"></span></td>
+				</tr>
+				<tr>
+					<th>quantity</th>
+					<td><input type="number" min="1"
+						th:max="${product.stockQuantity}" value="1" name="qty" /></td>
+				</tr>
+				<tr>
+					<th></th>
+					<td><span th:if="${product.stockQuantity == 0}">
+							<button class="btn btn-danger my-2 my-sm-0" type="submit"
+								disabled>Item out of stock</button>
+					</span> <span th:if="${product.stockQuantity >= 1}">
+							<button class="btn btn-success my-2 my-sm-0" type="submit">Add
+								to basket</button>
+					</span></td>
+				</tr>
+
+			</table>
+		</form>
+
+
+
+
+
+	</main>
+
+
+</body>
+</html>

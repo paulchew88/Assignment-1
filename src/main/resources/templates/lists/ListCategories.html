@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="fragments/common :: myheader"></div>
+</head>
+<body>
+
+
+	<main role="main" class="container">
+		<nav th:replace="fragments/common :: mynavbar"></nav>
+
+
+
+
+		<main role="main" class="container">
+			<h1 align="left">Categories</h1>
+
+			<div class="alert alert-danger" th:if="${error != null}"
+				th:text="${error}"></div>
+			<table class="table table-striped">
+				<tr>
+
+					<th>Category Name</th>
+
+					<th sec:authorize="hasRole('ROLE_ADMIN')">Description</th>
+					<th>Actions</th>
+				</tr>
+				<tr th:each="categories : ${categories}">
+
+					<td th:text="${categories.name}"></td>
+					<td sec:authorize="hasRole('ROLE_ADMIN')" th:text="${categories.description}"></td>
+
+
+					<td>
+						<div sec:authorize="hasRole('ROLE_ADMIN')">
+							<a class="btn btn-primary" href="#"
+								th:href="@{/edit/categories/} + ${categories.categoriesId}">Edit</a>
+							<a class="btn btn-danger" href="#"
+								th:href="@{/remove/categories/} + ${categories.categoriesId}">delete</a>
+						</div>
+						<a class="btn btn-primary" href="#"
+								th:href="@{/list/productByCategory/} + ${categories.categoriesId}">View Products</a>
+					</td>
+
+
+
+				</tr>
+			</table>
+
+
+
+
+
+		</main>
+
+
+
+
+
+
+	</main>
+
+
+</body>
+</html>
